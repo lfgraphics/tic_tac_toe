@@ -10,6 +10,8 @@ let XWinStatus = document.getElementById('XW');
 let OWinStatus = document.getElementById('OW');
 let DrawStatus = document.getElementById('Draw');
 
+document.getElementById('reset').addEventListener('click',endGame);
+
 playerIndicator.textContent = currentPlayer
 
 const trackCells = () => ({
@@ -72,7 +74,6 @@ function checkWin() {
 
 
 function checkDraw() {
-    gameStatus = 'Draw'
     return board.every(cell => cell !== '');
 }
 
@@ -97,7 +98,10 @@ function makeMove(cellIndex) {
                 endGame();
             }, 3000)
         } else if (checkDraw()) {
+            gameStatus = 'Draw'
+            DrawStatus.innerHTML = parseInt(DrawStatus.innerHTML) + 1
             endGame();
+            alert('Draw')
         } else {
             switchPlayer();
         }
