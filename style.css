@@ -79,11 +79,19 @@
     background-color: #ffcc00;
 }
 
-.navs{
+.navs {
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 30px;
+}
+
+#player {
+    font-size: xx-large;
+}
+
+.hero h4 {
+    color: #fff;
 }
 
 /* speaker swwitch */
@@ -165,10 +173,11 @@
 }
 
 /* ai mode btn */
-.tgl-btn{
+.tgl-btn {
     font-size: 20px;
     width: 60px;
 }
+
 .checkbox-wrapper-8 .tgl {
     display: none;
 }
@@ -248,7 +257,8 @@
 .checkbox-wrapper-8 .tgl-skewed+.tgl-btn:before {
     transform: skew(10deg);
     display: inline-block;
-    transition: all 0.2s ease;
+    transition: all 0.2s cubic-bezier(1, -0.23, 0, 1.28);
+    ;
     width: 100%;
     text-align: center;
     position: absolute;
@@ -293,7 +303,7 @@
 }
 
 
-.below-nav{
+.below-nav {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -302,7 +312,7 @@
     font-weight: 600;
 }
 
-#reset{
+#reset {
     width: 110px;
     height: 40px;
     /* padding: 10px; */

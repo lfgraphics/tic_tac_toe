@@ -12,31 +12,41 @@
 
     <div class="hero">
 
+        <h4><span id="player"></span>'s Chance</h4>
+
         <div class="navs">
             <!-- speakermode -->
             <input type="checkbox" id="checkboxInput">
             <label for="checkboxInput" class="toggleSwitch">
 
-                <div class="speaker"><svg xmlns="http://www.w3.org/2000/svg" version="1.0" viewBox="0 0 75 75">
+                <div class="speaker">
+                    <svg xmlns="http://www.w3.org/2000/svg" version="1.0" viewBox="0 0 75 75">
                         <path
                             d="M39.389,13.769 L22.235,28.606 L6,28.606 L6,47.699 L21.989,47.699 L39.389,62.75 L39.389,13.769z"
-                            style="stroke:#fff;stroke-width:5;stroke-linejoin:round;fill:#fff;"></path>
+                            style="stroke:#fff;stroke-width:5;stroke-linejoin:round;fill:#fff;">
+                        </path>
                         <path
                             d="M48,27.6a19.5,19.5 0 0 1 0,21.4M55.1,20.5a30,30 0 0 1 0,35.6M61.6,14a38.8,38.8 0 0 1 0,48.6"
-                            style="fill:none;stroke:#fff;stroke-width:5;stroke-linecap:round"></path>
-                    </svg></div>
+                            style="fill:none;stroke:#fff;stroke-width:5;stroke-linecap:round">
+                        </path>
+                    </svg>
+                </div>
 
-                <div class="mute-speaker"><svg version="1.0" viewBox="0 0 75 75" stroke="#fff" stroke-width="5">
-                        <path d="m39,14-17,15H6V48H22l17,15z" fill="#fff" stroke-linejoin="round"></path>
-                        <path d="m49,26 20,24m0-24-20,24" fill="#fff" stroke-linecap="round"></path>
-                    </svg></div>
+                <div class="mute-speaker">
+                    <svg version="1.0" viewBox="0 0 75 75" stroke="#fff" stroke-width="5">
+                        <path d="m39,14-17,15H6V48H22l17,15z" fill="#fff" stroke-linejoin="round">
+                        </path>
+                        <path d="m49,26 20,24m0-24-20,24" fill="#fff" stroke-linecap="round">
+                        </path>
+                    </svg>
+                </div>
 
             </label>
 
             <!-- ai mode btn -->
             <div class="checkbox-wrapper-8">
                 <input type="checkbox" id="cb3-8" class="tgl tgl-skewed">
-                <label for="cb3-8" data-tg-on="AI Mode" data-tg-off="OFF" class="tgl-btn"></label>
+                <label for="cb3-8" data-tg-on="AI Mode" data-tg-off="2 Player" class="tgl-btn"></label>
             </div>
 
         </div>
@@ -57,7 +67,8 @@
         <div class="below-nav">
             <div class="score">
                 <h4>Score</h4>
-                <p id="score">X = <span id="XW">00</span>, O = <span id="OW">00</span>, Draw = <span id="Draw">00</span></p>
+                <p id="score">X = <span id="XW">00</span>, O = <span id="OW">00</span>, Draw = <span id="Draw">00</span>
+                </p>
             </div>
             <button id="reset">Reset</button>
         </div>
