@@ -112,7 +112,7 @@
 }
 
 /* Hide default HTML checkbox */
-#checkboxInput {
+#audioBtn {
     display: none;
 }
 
@@ -154,21 +154,21 @@
     width: 18px;
 }
 
-#checkboxInput:checked+.toggleSwitch .speaker {
+#audioBtn:checked+.toggleSwitch .speaker {
     opacity: 0;
     transition-duration: .3s;
 }
 
-#checkboxInput:checked+.toggleSwitch .mute-speaker {
+#audioBtn:checked+.toggleSwitch .mute-speaker {
     opacity: 1;
     transition-duration: .3s;
 }
 
-#checkboxInput:active+.toggleSwitch {
+#audioBtn:active+.toggleSwitch {
     transform: scale(0.7);
 }
 
-#checkboxInput:hover+.toggleSwitch {
+#audioBtn:hover+.toggleSwitch {
     background-color: rgb(61, 61, 61);
 }
 

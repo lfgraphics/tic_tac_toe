@@ -10,6 +10,9 @@ let XWinStatus = document.getElementById('XW');
 let OWinStatus = document.getElementById('OW');
 let DrawStatus = document.getElementById('Draw');
 
+let audioBtn = document.getElementById('audioBtn');
+let sfx = new Audio('clap.wav')
+
 let winningCombinations = [
     [0, 1, 2], [3, 4, 5], [6, 7, 8],
     [0, 3, 6], [1, 4, 7], [2, 5, 8],
@@ -40,6 +43,10 @@ function checkWin() {
                 OWinStatus.innerHTML = parseInt(OWinStatus.innerHTML) + 1;
             } else if (gameStatus === 'Draw') {
                 DrawStatus.innerHTML = parseInt(DrawStatus.innerHTML) + 1;
+            }
+
+            if(!audioBtn.checked){
+                sfx.play();
             }
 
             setTimeout(() => {
