@@ -1,7 +1,7 @@
 const cells = document.querySelectorAll('.box');
 let cellArr = [...cells];
 
-let currentPlayer = "X";
+var currentPlayer = "X";
 let playerIndicator = document.getElementById('player');
 
 let gameStatus = "inProgress";
@@ -45,12 +45,11 @@ function checkWin() {
                 DrawStatus.innerHTML = parseInt(DrawStatus.innerHTML) + 1;
             }
 
-            if(!audioBtn.checked){
+            if (!audioBtn.checked) {
                 sfx.play();
             }
 
             setTimeout(() => {
-                alert(gameStatus);
                 endGame();
             }, 2000);
             return true;
@@ -85,7 +84,6 @@ function makeMove(cellIndex) {
             gameStatus = 'Draw';
             DrawStatus.innerHTML = parseInt(DrawStatus.innerHTML) + 1;
             endGame();
-            alert('Draw');
         } else {
             switchPlayer();
         }
@@ -96,6 +94,10 @@ cellArr.forEach((cell, index) => {
     cell.addEventListener('click', () => makeMove(index));
 });
 
-document.getElementById('reset').addEventListener('click', endGame);
+document.getElementById('reset').addEventListener('click', function () {
+    endGame();
+    currentPlayer =  currentPlayer === 'O' ? 'X' : 'X'
+    playerIndicator.textContent = currentPlayer;
+});
 
 playerIndicator.textContent = currentPlayer;
