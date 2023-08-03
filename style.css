@@ -7,6 +7,7 @@
 
 
 .hero {
+    /* top: 20px; */
     display: flex;
     flex-direction: column;
     height: 100vh;
@@ -14,11 +15,11 @@
     overflow: hidden;
     align-items: center;
     justify-content: center;
-    background-color: mediumpurple;
+    background-color: #9370d8;
 }
 
 .boxes {
-    background-color: rgba(128, 0, 128, 0.315);
+    background-color: #80008050;
     height: 400px;
     width: 400px;
     border-radius: 20px;
@@ -323,4 +324,27 @@
     cursor: pointer;
     background-color: rgba(128, 0, 128, 0.315);
     color: #fff;
+}
+
+.losing-cell{
+    background-color: red;
+}
+
+#custom-install-prompt{
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    margin-top: 10px;
+    align-items: center;
+    justify-content: center;
+}
+
+#custom-install-prompt button{
+    background-color: #80008050;
+    outline: none;
+    border: none;
+    color: #ffffff;
+    height: 30px;
+    cursor: pointer;
+    width: 100%;
 }

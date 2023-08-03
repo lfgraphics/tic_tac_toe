@@ -1,0 +1,27 @@
+{
+    "name": "Tic Tac Toe Game",
+    "short_name": "Tic Tac Toe",
+    "description": "A fun Tic Tac Toe game",
+    "start_url": "../index.html",
+    "display": "standalone",
+    "background_color": "#9370d8",
+    "theme_color": "#80008050",
+    "icons": [
+        {
+            "src": "android-chrome-192x192.png",
+            "type": "image/png",
+            "sizes": "192x192"
+        },
+        {
+            "src": "android-chrome-512x512.png",
+            "type": "image/png",
+            "sizes": "512x512"
+        },
+        {
+            "src": "maskable_icon.png",
+            "type": "image/png",
+            "sizes": "512x512",
+            "purpose": "any maskable"
+        }
+    ]
+}

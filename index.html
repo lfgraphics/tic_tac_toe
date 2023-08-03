@@ -2,9 +2,19 @@
 <html lang="en">
 
 <head>
+    <meta name="theme-color" content="#9370d8">
+    <meta name="description" content="Tic Tac Toe tic tac toe game bachchon ka game">
+    <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png">
+    <link rel="manifest" href="favicon/site.webmanifest">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
+
+    <meta property="og:image" content="/favicon/android-chrome-512x512.png">
+    <meta property="og:url" content="/favicon/android-chrome-512x512.png">
+
     <title>Tikc-Tac-Toe | LF Graphics</title>
 </head>
 
@@ -16,7 +26,7 @@
 
         <div class="navs">
             <!-- speakermode -->
-            <input type="checkbox" id="audioBtn" checked>
+            <input type="checkbox" id="audioBtn">
             <label for="audioBtn" class="toggleSwitch">
 
                 <div class="speaker">
@@ -45,7 +55,7 @@
 
             <!-- ai mode btn -->
             <div class="checkbox-wrapper-8">
-                <input type="checkbox" id="cb3-8" class="tgl tgl-skewed" checked>
+                <input type="checkbox" id="cb3-8" class="tgl tgl-skewed">
                 <label for="cb3-8" data-tg-on="AI Mode" data-tg-off="2 Player" class="tgl-btn"></label>
             </div>
 
@@ -72,9 +82,29 @@
             </div>
             <button id="reset">Reset</button>
         </div>
+        <!-- Custom install prompt -->
+        <div id="custom-install-prompt">
+            <p>Would you like to install our Tic Tac Toe game?</p>
+            <button id="installButton" onclick="installApp()">Install</button>
+        </div>
     </div>
 
+
     <script src="script.js"></script>
+
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', function () {
+                navigator.serviceWorker.register('service-worker.js')
+                    .then(function (registration) {
+                        console.log('Service worker registered:', registration);
+                    })
+                    .catch(function (error) {
+                        console.error('Service worker registration failed:', error);
+                    });
+            });
+        }
+    </script>
 </body>
 
 </html>
