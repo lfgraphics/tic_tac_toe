@@ -154,7 +154,7 @@ function makeMove(cellIndex) {
             } else {
                 switchPlayer();
                 if (aimodBtn.checked || aichance) {
-                    makeAIMove(); // Trigger AI move when AI mode is enabled
+                    makeAIMove();
                 }
             }
         }
@@ -217,7 +217,6 @@ function makeFirstAIMove() {
 
 function makeAIMove() {
     if (aimodBtn.checked && aichance) {
-        // Step 1: Check for winning moves for AI
         for (const combination of winningCombinations) {
             const [a, b, c] = combination;
             if (
@@ -247,7 +246,6 @@ function makeAIMove() {
             }
         }
 
-        // Step 2: Check for blocking opponent's winning moves
         const opponentPlayer = currentPlayer === 'X' ? 'O' : 'X';
         for (const combination of winningCombinations) {
             const [a, b, c] = combination;
@@ -276,19 +274,12 @@ function makeAIMove() {
 
         }
 
-        // Step 3: Make a random move
         if (aichance) {
-            // dontMoveNExt = false;
-            // aichance = false;
             const emptyCells = board.map((cell, index) => (cell === '' ? index : -1)).filter(cellIndex => cellIndex !== -1);
             const randomIndex = Math.floor(Math.random() * emptyCells.length);
             makeMove(emptyCells[randomIndex]);
         } else {
             return;
-            // dontMoveNExt = false;
-            // const emptyCells = board.map((cell, index) => (cell === '' ? index : -1)).filter(cellIndex => cellIndex !== -1);
-            // const randomIndex = Math.floor(Math.random() * emptyCells.length);
-            // makeMove(emptyCells[randomIndex]);
         }
     }
 
@@ -312,6 +303,11 @@ document.getElementById('reset').addEventListener('click', reset)
 playerIndicator.textContent = currentPlayer;
 
 aimodBtn.addEventListener('click', reset);
+
+
+
+
+
 
 let deferredPrompt;
 const customInstallPrompt = document.getElementById('custom-install-prompt');
