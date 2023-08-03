@@ -326,11 +326,11 @@
     color: #fff;
 }
 
-.losing-cell{
+.losing-cell {
     background-color: red;
 }
 
-#custom-install-prompt{
+#custom-install-prompt {
     color: #fff;
     display: flex;
     flex-direction: column;
@@ -339,7 +339,7 @@
     justify-content: center;
 }
 
-#custom-install-prompt button{
+#custom-install-prompt button {
     background-color: #80008050;
     outline: none;
     border: none;
@@ -347,4 +347,10 @@
     height: 30px;
     cursor: pointer;
     width: 100%;
+}
+
+@media all and (display-mode: standalone) {
+    #custom-install-prompt {
+        display: none;
+    }
 }
