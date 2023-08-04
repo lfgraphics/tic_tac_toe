@@ -27,7 +27,7 @@ let winningCombinations = [
     [0, 4, 8], [2, 4, 6],
 ];
 
-let board = ['', '', '', '', '', '', '', '', ''];
+let board = [cellArr[0].innerHTML, cellArr[1].innerHTML, cellArr[2].innerHTML, cellArr[3].innerHTML, cellArr[4].innerHTML, cellArr[5].innerHTML, cellArr[6].innerHTML, cellArr[7].innerHTML, cellArr[8].innerHTML]
 
 function switchPlayer() {
     currentPlayer = currentPlayer === "X" ? "O" : "X";
@@ -130,14 +130,14 @@ function endGame() {
     aiWon = false
 }
 
-function makeMove(cellIndex) {
+function makeMove(cellIndex, e) {
     if (!aichance) {
         if (aimodBtn.checked) {
             aichance = true
         }
-        if (cellArr[cellIndex] && board[cellIndex] === '' && gameStatus !== 'X Won' && gameStatus !== 'O Won') {
-            board[cellIndex] = currentPlayer;
+        if (cellArr[cellIndex] && board[cellIndex] === '' && gameStatus !== 'X Won' && gameStatus !== 'O Won' && e.target.innerHTML =='') {
             cellArr[cellIndex].innerHTML = currentPlayer;
+            board[cellIndex] = currentPlayer;
 
             if (!audioBtn.checked) {
                 click.play();
@@ -165,12 +165,12 @@ function makeMove(cellIndex) {
         const emptyCells = '12345678';
         const randomIndex = Math.floor(Math.random() * emptyCells.length);
         makeMove(emptyCells[randomIndex]);
-        let currentboard = [cellArr[0].innerHTML, cellArr[1].innerHTML, cellArr[2].innerHTML, cellArr[3].innerHTML, cellArr[4].innerHTML, cellArr[5].innerHTML, cellArr[6].innerHTML, cellArr[7].innerHTML, cellArr[8].innerHTML]
+        // let currentboard = [cellArr[0].innerHTML, cellArr[1].innerHTML, cellArr[2].innerHTML, cellArr[3].innerHTML, cellArr[4].innerHTML, cellArr[5].innerHTML, cellArr[6].innerHTML, cellArr[7].innerHTML, cellArr[8].innerHTML]
         let extraMove = currentPlayer === 'X' ? 'O' : 'X';
-        let extramoveBox = currentboard.indexOf(extraMove)
+        let extramoveBox = board.indexOf(extraMove)
         if (extramoveBox !== '') {
             board[extraMove] = '';
-            cellArr[extramoveBox].innerHTML = '';
+            // cellArr[extramoveBox].innerHTML = '';
         }
         switchPlayer()
         return;
@@ -180,7 +180,7 @@ function makeMove(cellIndex) {
         dontMoveNExt = false
         if (cellArr[cellIndex] && board[cellIndex] === '' && gameStatus !== 'X Won' && gameStatus !== 'O Won') {
             board[cellIndex] = currentPlayer;
-            cellArr[cellIndex].innerHTML = currentPlayer;
+            // cellArr[cellIndex].innerHTML = currentPlayer;
 
             if (checkWin()) {
                 setTimeout(() => {
@@ -199,18 +199,20 @@ function makeMove(cellIndex) {
         }
     }
 }
+
+
 let extraMove;
 function makeFirstAIMove() {
     aichance = false
     const emptyCells = '12345678';
     const randomIndex = Math.floor(Math.random() * emptyCells.length);
     makeMove(emptyCells[randomIndex]);
-    let currentboard = [cellArr[0].innerHTML, cellArr[1].innerHTML, cellArr[2].innerHTML, cellArr[3].innerHTML, cellArr[4].innerHTML, cellArr[5].innerHTML, cellArr[6].innerHTML, cellArr[7].innerHTML, cellArr[8].innerHTML]
+    // let currentboard = [cellArr[0].innerHTML, cellArr[1].innerHTML, cellArr[2].innerHTML, cellArr[3].innerHTML, cellArr[4].innerHTML, cellArr[5].innerHTML, cellArr[6].innerHTML, cellArr[7].innerHTML, cellArr[8].innerHTML]
     let extraMove = currentPlayer === 'X' ? 'O' : 'X';
-    let extramoveBox = currentboard.indexOf(extraMove)
+    let extramoveBox = board.indexOf(extraMove)
     if (extramoveBox !== '') {
         board[extraMove] = '';
-        cellArr[extramoveBox].innerHTML = '';
+        // cellArr[extramoveBox].innerHTML = '';
     }
     switchPlayer()
 }
