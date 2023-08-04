@@ -3,14 +3,14 @@ const cacheVersion = 'tic-tac-toe-v1';
 
 // Files to cache
 const filesToCache = [
-    'index.html',
-    'style.css',
-    'script.js',
-    'clap.wav',
-    'click.mp3',
-    '/favicon/favicon.ico',
-    '/favicon/site.webmanifest',
-    '/favicon/apple-touch-icon.png',
+    '/tic_tac_toe/index.html',
+    '/tic_tac_toe/style.css',
+    '/tic_tac_toe/script.js',
+    '/tic_tac_toe/clap.wav',
+    '/tic_tac_toe/click.mp3',
+    '/tic_tac_toe/favicon/favicon.ico',
+    '/tic_tac_toe/favicon/site.webmanifest',
+    '/tic_tac_toe/favicon/apple-touch-icon.png',
     // Add more resources to cache here
 ];
 
