@@ -1,3 +1,4 @@
+// defining variables
 const cells = document.querySelectorAll('.box');
 let cellArr = [...cells];
 
@@ -11,14 +12,19 @@ let OWinStatus = document.getElementById('OW');
 let DrawStatus = document.getElementById('Draw');
 
 let audioBtn = document.getElementById('audioBtn');
+
 let sfx = new Audio('clap.wav');
 
 let click = new Audio('click.mp3');
 
+
+// aimode special variables
 let aimodBtn = document.getElementById('cb3-8');
+let extraMove;
+
+// flags to check for ai have to move or not
 let aichance = false;
 let aiWon = false;
-
 let dontMoveNExt = false
 
 let winningCombinations = [
@@ -27,7 +33,11 @@ let winningCombinations = [
     [0, 4, 8], [2, 4, 6],
 ];
 
+// board to check and make moves on the cells
 let board = [cellArr[0].innerHTML, cellArr[1].innerHTML, cellArr[2].innerHTML, cellArr[3].innerHTML, cellArr[4].innerHTML, cellArr[5].innerHTML, cellArr[6].innerHTML, cellArr[7].innerHTML, cellArr[8].innerHTML]
+
+// functions stratrup 
+playerIndicator.textContent = currentPlayer;
 
 function switchPlayer() {
     currentPlayer = currentPlayer === "X" ? "O" : "X";
@@ -37,7 +47,7 @@ function switchPlayer() {
 function checkWin() {
     for (const combination of winningCombinations) {
         const [a, b, c] = combination;
-
+        // check this move was made by ai (ai winig or not) ai is not winig means player is winig so makeit win
         if (!aichance && !aimodBtn.checked) {
             if (board[a] && board[a] === board[b] && board[a] === board[c]) {
                 gameStatus = `${board[a]} Won`;
@@ -63,6 +73,8 @@ function checkWin() {
                 return true;
             }
         }
+
+        // the player is losing and ai is winig so meke it defeat
         else if (!aichance) {
             if (board[a] && board[a] === board[b] && board[a] === board[c]) {
                 gameStatus = `${board[a]} Won`;
@@ -84,14 +96,14 @@ function checkWin() {
                 return true;
             }
         }
+
+        // this else if could be exta we have to check btw this isnot related to makeMove() so it's not responsible for blank cell bug
         else if (aichance) {
             if (board[a] && board[a] === board[b] && board[a] === board[c]) {
                 gameStatus = `${board[a]} Won`;
                 cellArr[a].classList.add("winning-cell");
                 cellArr[b].classList.add("winning-cell");
                 cellArr[c].classList.add("winning-cell");
-
-
                 if (gameStatus === 'X Won') {
                     XWinStatus.innerHTML = parseInt(XWinStatus.innerHTML) + 1;
                 } else if (gameStatus === 'O Won') {
@@ -131,11 +143,12 @@ function endGame() {
 }
 
 function makeMove(cellIndex, e) {
+    // taking e to try to debug empty cell with updated array an unupdated flags and player etc but it didn't resolved
     if (!aichance) {
         if (aimodBtn.checked) {
             aichance = true
         }
-        if (cellArr[cellIndex] && board[cellIndex] === '' && gameStatus !== 'X Won' && gameStatus !== 'O Won' && e.target.innerHTML =='') {
+        if (cellArr[cellIndex] && board[cellIndex] === '' && gameStatus !== 'X Won' && gameStatus !== 'O Won' && e.target.innerHTML == '') {
             cellArr[cellIndex].innerHTML = currentPlayer;
             board[cellIndex] = currentPlayer;
 
@@ -154,7 +167,7 @@ function makeMove(cellIndex, e) {
             } else {
                 switchPlayer();
                 if (aimodBtn.checked || aichance) {
-                    makeAIMove(); // Trigger AI move when AI mode is enabled
+                    makeAIMove();
                 }
             }
         }
@@ -162,15 +175,15 @@ function makeMove(cellIndex, e) {
         aiWon = false;
         dontMoveNExt = false;
         aichance = false;
-        const emptyCells = '12345678';
+
+        const emptyCells = '012345678';
         const randomIndex = Math.floor(Math.random() * emptyCells.length);
         makeMove(emptyCells[randomIndex]);
-        // let currentboard = [cellArr[0].innerHTML, cellArr[1].innerHTML, cellArr[2].innerHTML, cellArr[3].innerHTML, cellArr[4].innerHTML, cellArr[5].innerHTML, cellArr[6].innerHTML, cellArr[7].innerHTML, cellArr[8].innerHTML]
+
         let extraMove = currentPlayer === 'X' ? 'O' : 'X';
         let extramoveBox = board.indexOf(extraMove)
         if (extramoveBox !== '') {
             board[extraMove] = '';
-            // cellArr[extramoveBox].innerHTML = '';
         }
         switchPlayer()
         return;
@@ -180,8 +193,6 @@ function makeMove(cellIndex, e) {
         dontMoveNExt = false
         if (cellArr[cellIndex] && board[cellIndex] === '' && gameStatus !== 'X Won' && gameStatus !== 'O Won') {
             board[cellIndex] = currentPlayer;
-            // cellArr[cellIndex].innerHTML = currentPlayer;
-
             if (checkWin()) {
                 setTimeout(() => {
                     endGame();
@@ -200,28 +211,26 @@ function makeMove(cellIndex, e) {
     }
 }
 
-
-let extraMove;
 function makeFirstAIMove() {
     aichance = false
-    const emptyCells = '12345678';
+    const emptyCells = '012345678';
     const randomIndex = Math.floor(Math.random() * emptyCells.length);
     makeMove(emptyCells[randomIndex]);
-    // let currentboard = [cellArr[0].innerHTML, cellArr[1].innerHTML, cellArr[2].innerHTML, cellArr[3].innerHTML, cellArr[4].innerHTML, cellArr[5].innerHTML, cellArr[6].innerHTML, cellArr[7].innerHTML, cellArr[8].innerHTML]
+
+    // there was an issure withe the AI move ai wasmaking to moves so I tried to prevent/ undo that extra move and this worked
     let extraMove = currentPlayer === 'X' ? 'O' : 'X';
     let extramoveBox = board.indexOf(extraMove)
     if (extramoveBox !== '') {
         board[extraMove] = '';
-        // cellArr[extramoveBox].innerHTML = '';
     }
     switchPlayer()
 }
 
 function makeAIMove() {
     if (aimodBtn.checked && aichance) {
-        // Step 1: Check for winning moves for AI
         for (const combination of winningCombinations) {
             const [a, b, c] = combination;
+            // first checking if AI can win by it's move if yes, so make move to win
             if (
                 board[a] === currentPlayer &&
                 board[a] === board[b] &&
@@ -249,7 +258,7 @@ function makeAIMove() {
             }
         }
 
-        // Step 2: Check for blocking opponent's winning moves
+        // if not then check if physical player can win, so try to block his win
         const opponentPlayer = currentPlayer === 'X' ? 'O' : 'X';
         for (const combination of winningCombinations) {
             const [a, b, c] = combination;
@@ -277,29 +286,17 @@ function makeAIMove() {
             }
 
         }
-
-        // Step 3: Make a random move
+        // if neither found then make a random move
         if (aichance) {
-            // dontMoveNExt = false;
-            // aichance = false;
             const emptyCells = board.map((cell, index) => (cell === '' ? index : -1)).filter(cellIndex => cellIndex !== -1);
             const randomIndex = Math.floor(Math.random() * emptyCells.length);
             makeMove(emptyCells[randomIndex]);
         } else {
             return;
-            // dontMoveNExt = false;
-            // const emptyCells = board.map((cell, index) => (cell === '' ? index : -1)).filter(cellIndex => cellIndex !== -1);
-            // const randomIndex = Math.floor(Math.random() * emptyCells.length);
-            // makeMove(emptyCells[randomIndex]);
         }
     }
 
 }
-
-
-cellArr.forEach((cell, index) => {
-    cell.addEventListener('click', () => makeMove(index));
-});
 
 function reset() {
     endGame();
@@ -309,29 +306,30 @@ function reset() {
     aichance = false;
     dontMoveNExt = false;
 }
-document.getElementById('reset').addEventListener('click', reset)
 
-playerIndicator.textContent = currentPlayer;
+// adding evenListeners and function calls
+
+cellArr.forEach((cell, index) => {
+    cell.addEventListener('click', () => makeMove(index));
+});
+
+document.getElementById('reset').addEventListener('click', reset)
 
 aimodBtn.addEventListener('click', reset);
 
+
+// installation of wpa
 let deferredPrompt;
 const customInstallPrompt = document.getElementById('custom-install-prompt');
 const installButton = document.getElementById('installButton');
 
-// Check if the app is running in standalone mode
 const isStandalone = window.matchMedia('(display-mode: standalone)').matches;
 
-// Check if the app has been installed
 const isAppInstalled = localStorage.getItem('isAppInstalled') === 'true';
 
 window.addEventListener('beforeinstallprompt', function (event) {
-    // Prevent the default browser prompt
     event.preventDefault();
-    // Save the event for later use
     deferredPrompt = event;
-
-    // Hide the custom install prompt if the app is installed or running in standalone mode
     if (isAppInstalled || isStandalone) {
         customInstallPrompt.style.display = 'none';
     } else {
@@ -340,20 +338,12 @@ window.addEventListener('beforeinstallprompt', function (event) {
 });
 
 function installApp() {
-    // Trigger the deferred prompt
     deferredPrompt.prompt();
-
-    // Wait for the user to respond to the prompt
     deferredPrompt.userChoice.then(function (choiceResult) {
-        // Reset the deferred prompt variable
         deferredPrompt = null;
-
-        // Optionally, you can handle the user's choice here
         if (choiceResult.outcome === 'accepted') {
             console.log('User accepted the install prompt');
-            // Set the app installation flag in localStorage
             localStorage.setItem('isAppInstalled', 'true');
-            // Hide the custom install prompt
             customInstallPrompt.style.display = 'none';
         } else {
             console.log('User dismissed the install prompt');
