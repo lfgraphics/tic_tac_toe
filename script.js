@@ -148,7 +148,7 @@ function makeMove(cellIndex, e) {
         if (aimodBtn.checked) {
             aichance = true
         }
-        if (cellArr[cellIndex] && board[cellIndex] === '' && gameStatus !== 'X Won' && gameStatus !== 'O Won' && e.target.innerHTML == '') {
+        if (cellArr[cellIndex] && board[cellIndex] === '' && gameStatus !== 'X Won' && gameStatus !== 'O Won') {
             cellArr[cellIndex].innerHTML = currentPlayer;
             board[cellIndex] = currentPlayer;
 
